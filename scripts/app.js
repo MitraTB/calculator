@@ -11,10 +11,12 @@ function transferInputToInt() {
     return parseInt(userInput.value);
 }
 
+
 function showEnteredValues (operator, inputNumber, prevResult){
-    const showEntries = `${inputNumber} ${operator} ${prevResult}`;
+    const showEntries = `${prevResult} ${operator} ${inputNumber}`;
     outputResult (currentResult, showEntries);
 }
+
 
 function CreateArraysOfEntries (operator, number, previousResult){
     const logEntry = {
@@ -24,42 +26,49 @@ function CreateArraysOfEntries (operator, number, previousResult){
     result : currentResult,
     }
     logEntries.push(logEntry);
+    console.log(logEntries);
 }
 
-function add(){
+
+function calculationResult(calculationType){
     enteredNumber = transferInputToInt();
     initialResult = currentResult;
-    currentResult = currentResult + enteredNumber;
-    console.log(currentResult);
-    showEnteredValues('+', enteredNumber, initialResult);
-    CreateArraysOfEntries('+', enteredNumber, initialResult);
+    let mathOperator;
+    if (calculationType === 'add'){
+        currentResult += enteredNumber;
+        mathOperator = '+'
+    }
+    if (calculationType === 'subtract'){
+        currentResult -= enteredNumber;
+        mathOperator = '-'
+    }
+    if (calculationType === 'divide'){
+        currentResult /= enteredNumber;
+        mathOperator = '/'
+    }
+    if (calculationType === 'multiply') {
+        currentResult *= enteredNumber;
+        mathOperator = '*'
+    }
+    showEnteredValues (mathOperator, enteredNumber, initialResult);
+    CreateArraysOfEntries (mathOperator, enteredNumber, initialResult);
+}
 
+
+function add(){
+    calculationResult('add');
 }
 
 function subtract(){
-    enteredNumber = transferInputToInt();
-    initialResult = currentResult;
-    currentResult = currentResult - enteredNumber;
-    showEnteredValues ('-', enteredNumber, initialResult);
-    CreateArraysOfEntries('-', enteredNumber, initialResult);
+    calculationResult('subtract');
 }
 
-
-
 function divide(){
-    enteredNumber = transferInputToInt();
-    initialResult = currentResult;
-    currentResult = currentResult / enteredNumber;
-    showEnteredValues ('/', enteredNumber, initialResult);
-    CreateArraysOfEntries ('/', enteredNumber, initialResult);
+    calculationResult('divide');
 }
 
 function multiply(){
-    enteredNumber = transferInputToInt();
-    initialResult = currentResult;
-    currentResult = currentResult * enteredNumber;
-    showEnteredValues('*', enteredNumber, initialResult);
-    CreateArraysOfEntries ('*', enteredNumber, initialResult);
+    calculationResult ('multiply');
 }
 
 addBtn.addEventListener('click', add);
