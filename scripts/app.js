@@ -1,5 +1,6 @@
 let currentResult = 0; 
 console.log(userInput.value);
+const logEntries = [];
 
 /*function add ( number1, number2){
 const result = number1 + number2;
@@ -15,12 +16,24 @@ function showEnteredValues (operator, inputNumber, prevResult){
     outputResult (currentResult, showEntries);
 }
 
+function CreateArraysOfEntries (operator, number, previousResult){
+    const logEntry = {
+    operator: operator , 
+    number1 : number , 
+    number2 : previousResult , 
+    result : currentResult,
+    }
+    logEntries.push(logEntry);
+}
+
 function add(){
     enteredNumber = transferInputToInt();
     initialResult = currentResult;
     currentResult = currentResult + enteredNumber;
     console.log(currentResult);
     showEnteredValues('+', enteredNumber, initialResult);
+    CreateArraysOfEntries('+', enteredNumber, initialResult);
+
 }
 
 function subtract(){
@@ -28,6 +41,7 @@ function subtract(){
     initialResult = currentResult;
     currentResult = currentResult - enteredNumber;
     showEnteredValues ('-', enteredNumber, initialResult);
+    CreateArraysOfEntries('-', enteredNumber, initialResult);
 }
 
 
@@ -37,7 +51,7 @@ function divide(){
     initialResult = currentResult;
     currentResult = currentResult / enteredNumber;
     showEnteredValues ('/', enteredNumber, initialResult);
-    
+    CreateArraysOfEntries ('/', enteredNumber, initialResult);
 }
 
 function multiply(){
@@ -45,6 +59,7 @@ function multiply(){
     initialResult = currentResult;
     currentResult = currentResult * enteredNumber;
     showEnteredValues('*', enteredNumber, initialResult);
+    CreateArraysOfEntries ('*', enteredNumber, initialResult);
 }
 
 addBtn.addEventListener('click', add);
